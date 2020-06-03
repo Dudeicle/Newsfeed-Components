@@ -85,8 +85,71 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Title of the new Article!',
+    date: 'June 3rd, 2020',
+    firstParagraph: `LOTS OF THINGS`,
+
+    secondParagraph: `LOTS OF STUFF`,
+
+    thirdParagraph: `THINGS AND ALSO SOME STUFF`
   }
 ];
+
+const parentOfArticle = document.body
+
+function articleMaker(data) {
+
+  const article = document.createElement('div')
+  const articleTitle = document.createElement('h2')
+  const articleDate = document.createElement('p')
+  const articleP1 = document.createElement('p')
+  const articleP2 = document.createElement('p')
+  const articleP3 = document.createElement('p')
+  const articleSpan = document.createElement('span')
+
+
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(articleP1)
+  article.appendChild(articleP2)
+  article.appendChild(articleP3)
+  article.appendChild(articleSpan)
+
+  article.classList.add('article')
+  articleDate.classList.add('date')
+  articleSpan.classList.add('expandButton', 'collapseButton')
+
+  articleTitle.textContent = data.title
+  articleDate.textContent = data.date
+  articleP1.textContent = data.firstParagraph
+  articleP2.textContent = data.secondParagraph
+  articleP3.textContent = data.thirdParagraph
+  articleSpan.textContent = 'READ MORE'
+
+
+
+  articleSpan.addEventListener('click', event => {
+    
+    article.classList.toggle('article-open')
+
+  })
+
+
+  return article
+}
+
+// TESTING
+
+const testingTester = articleMaker({ title: 'foo', date: 'bar' })
+console.log('there should be stuff here', testingTester)
+
+for (let i = 0; i < data.length; i++) {
+  const article = articleMaker(data[i])
+  parentOfArticle.appendChild(article)
+}
+
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
 
